@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swipe Demo</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="title"><i class="fa-solid fa-fire"></i>Tinder</div>
+        <!-- Stack thẻ -->
+        <div class="stacks-card">
+            <div class="badge badge-nope">Nope</div>
+            <div class="badge badge-love">Love</div>
+            <div class="badge badge-save">Save</div>
+
+            <div class="card">
+                <div class="card__img">
+                    <img src="./img/img1.jpg" alt="" srcset="">
+                </div>
+                <div class="card__info">
+                    <h1 class="name">MCK <i class="fa-regular fa-circle-check"></i></h1>
+                    <h2><span class="age">18</span><span class="address">Hà Nội</span></h2>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card__img">
+                    <img src="./img/img2.jpg" alt="" srcset="">
+                </div>
+                <div class="card__info">
+                    <h1 class="name">Tlinh <i class="fa-regular fa-circle-check"></i></h1>
+                    <h2><span class="age">16</span><span class="address">Hà Nội</span></h2>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card__img">
+                    <img src="./img/img3.jpg" alt="" srcset="">
+                </div>
+                <div class="card__info">
+                    <h1 class="name">Wrxdie <i class="fa-regular fa-circle-check"></i></h1>
+                    <h2><span class="age">18</span><span class="address">Hà Nội</span></h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nút điều khiển -->
+        <div class="buttons">
+            <button class="btn btn-nope" id="btn-nope" title="Nope"><i class="fa-solid fa-xmark"></i></button>
+            <button class="btn btn-love" id="btn-love" title="Love"><i class="fa-solid fa-heart"></i></button>
+            <button class="btn btn-star" id="btn-star" title="Star"><i class="fa-solid fa-star"></i></button>
+        </div>
+    </div>
+
+    <script src="./main.js"></script>
+</body>
+
+</html>
