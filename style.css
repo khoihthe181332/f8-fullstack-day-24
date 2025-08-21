@@ -102,7 +102,6 @@ body {
     border-radius: 15px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     /* transition: transform 0.5s, opacity 0.5s; */
-    touch-action: none;
     /* will-change: transform, opacity; */
 
     cursor: grab;

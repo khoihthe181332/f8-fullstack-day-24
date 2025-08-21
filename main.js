@@ -12,6 +12,10 @@ let mouseCoord = {
     x: 0,
     y: 0,
 };
+let lastTouch = {
+    x: 0,
+    y: 0,
+};
 
 // Hàm xác định thẻ đầu tiên
 function getTopCard() {
@@ -67,30 +71,38 @@ function swipeCard(card, direction) {
     });
 }
 
+// Hàm xử lý events touch || mouse
+function getEvents(e) {
+    return e.touches?.length ? e.touches[0] : e;
+}
+
 // Hàm xử lý sự kiện túm
 function handleMouseDown(e) {
     e.preventDefault(); // Loại bỏ tính chất mặc định 
+
+    const event = getEvents(e);
     currentCard = getTopCard();
 
     if (!currentCard) return;
     isDragging = true
-    mouseCoord.x = e.clientX;
+    mouseCoord.x = event.clientX;
 };
 
 // Hàm xử lý sự kiện kéo ảnh
 function handleMouseMove(e) {
     e.preventDefault();
     currentCard = getTopCard();
-    currentCard.style.transition = "none";
-
     if (!isDragging || !currentCard) return;
 
     if (isDragging) {
-        const distanceX = e.clientX - mouseCoord.x;
+        const event = getEvents(e);
+        lastTouch.x = event.clientX;
+
+        const distanceX = event.clientX - mouseCoord.x;
         currentCard.style.transform = `translateX(${distanceX}px) rotate(${distanceX * 0.15}deg)`;
-        if (distanceX >= 280) {
+        if (distanceX >= 270) {
             swipeCard(currentCard, "right");
-        } else if (distanceX <= -280) {
+        } else if (distanceX <= -270) {
             swipeCard(currentCard, "left");
         }
     }
@@ -98,18 +110,30 @@ function handleMouseMove(e) {
 
 // Hàm xử lý sự kiến thả ảnh
 function handleMouseUp(e) {
+    e.preventDefault();
+    const event = getEvents(e);
     currentCard = getTopCard();
     // Nếu kéo chưa đủ thì sẽ trở về vị trí cũ
-    const distanceX = e.clientX - mouseCoord.x;
+    const distanceX = event.clientX - mouseCoord.x;
     currentCard.style.transition = "0.5s";
+
+    if (distanceX < 270 && distanceX > -270) {
+        currentCard.style.transform = `translateX(0px) rotate(0deg)`;
+    }
+
     isDragging = false;
-    if (distanceX < 280 && distanceX > -280) currentCard.style.transform = `translateX(0px) rotate(0deg)`;
 };
 
 // Sự kiện chuột
-stacksCard.addEventListener("pointerdown", handleMouseDown);
-document.addEventListener("pointermove", handleMouseMove);
-document.addEventListener("pointerup", handleMouseUp);
+stacksCard.addEventListener("mousedown", handleMouseDown);
+document.addEventListener("mousemove", handleMouseMove);
+document.addEventListener("mouseup", handleMouseUp);
+
+// Sự kiện ngón tay
+stacksCard.addEventListener("touchstart", handleMouseDown, { passive: false });
+document.addEventListener("touchmove", handleMouseMove, { passive: false });
+document.addEventListener("touchend", handleMouseUp, { passive: false });
+
 
 // Hàm sử lý sự kiện ấn nút Nope
 btnNope.addEventListener("click", () => {
@@ -127,7 +151,6 @@ btnStar.addEventListener("click", () => {
     const card = getTopCard();
     if (card) swipeCard(card, "up");
 });
-
 
 
 
