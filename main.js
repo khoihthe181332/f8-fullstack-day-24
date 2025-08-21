@@ -86,6 +86,7 @@ function handleMouseDown(e) {
     if (!currentCard) return;
     isDragging = true
     mouseCoord.x = event.clientX;
+    currentCard.style.transition = "none";
 };
 
 // Hàm xử lý sự kiện kéo ảnh
@@ -111,10 +112,10 @@ function handleMouseMove(e) {
 // Hàm xử lý sự kiến thả ảnh
 function handleMouseUp(e) {
     e.preventDefault();
-    const event = getEvents(e);
     currentCard = getTopCard();
     // Nếu kéo chưa đủ thì sẽ trở về vị trí cũ
-    const distanceX = event.clientX - mouseCoord.x;
+    const distanceX = lastTouch.x - mouseCoord.x;
+
     currentCard.style.transition = "0.5s";
 
     if (distanceX < 270 && distanceX > -270) {
